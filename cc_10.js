@@ -87,3 +87,18 @@ Inventory.prototype.listOrders = function() {
 inventory.placeOrder(601, prod1, 2);
 inventory.listOrders(); // Expected: Order details
 console.log(prod1.getDetails()); // Expected: Stock reduced to 3
+
+// Task 5: Implementing Product Restocking
+Inventory.prototype.restockProduct = function(productId, quantity) {
+    const product = this.products.find(p => p.id === productId);
+    if (product) {
+        product.stock += quantity;
+        console.log(`Restocked ${quantity} units of ${product.name}.`);
+    } else {
+        console.log("Product not found.");
+    }
+};
+
+// Test Case for Restocking
+inventory.restockProduct(101, 5);
+console.log(prod1.getDetails()); // Expected: Stock increased to 8
