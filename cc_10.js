@@ -68,3 +68,22 @@ class Inventory {
 const inventory = new Inventory();
 inventory.addProduct(prod1);
 inventory.listProducts(); // Expected: List all products
+
+// Task 4: Implementing Order Management
+Inventory.prototype.placeOrder = function(orderId, product, quantity) {
+    if (product.stock >= quantity) {
+        const order = new Order(orderId, product, quantity);
+        this.orders.push(order);
+    } else {
+        console.log(`Order ${orderId} failed: Not enough stock.`);
+    }
+};
+
+Inventory.prototype.listOrders = function() {
+    this.orders.forEach(order => console.log(order.getOrderDetails()));
+};
+
+// Test Case for Order Management
+inventory.placeOrder(601, prod1, 2);
+inventory.listOrders(); // Expected: Order details
+console.log(prod1.getDetails()); // Expected: Stock reduced to 3
